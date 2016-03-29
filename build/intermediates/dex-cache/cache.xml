@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\huylv\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jar="/Users/hackintosh/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="D:\ANDROID\ASproject\AugmentedReality_Android\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1-2aa2e8cdf8fcfceca3a2de136a9ff4b02f1d5f35.jar" />
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/hackintosh/Documents/ASprj/AugmentedReality-Android/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-acd4421669f59cadf9d6c9385b571e9d6bf9e8d6.jar" />
     </item>
 
 </items>

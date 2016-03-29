@@ -67,12 +67,20 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/marker_detail_iset"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="null"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ProgressBar
+
+            android:id="@+id/marker_detail_download_iset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="100"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -96,6 +104,11 @@
             android:layout_weight="2"
             android:text="null"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ProgressBar
+            android:id="@+id/marker_detail_download_fset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="100"/>
     </LinearLayout>
 
     <LinearLayout
@@ -119,6 +132,11 @@
             android:layout_weight="2"
             android:text="null"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ProgressBar
+            android:id="@+id/marker_detail_download_fset3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="100"/>
     </LinearLayout>
 
     <LinearLayout
@@ -144,7 +162,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/marker_detail_image"
         android:layout_width="200dp"
         android:layout_height="200dp"
