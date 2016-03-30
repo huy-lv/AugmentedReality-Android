@@ -2,11 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/Users/hackintosh/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jar="D:\ANDROID\ASproject\AugmentedReality_Android\app\build\intermediates\exploded-aar\com.koushikdutta.ion\ion\2.1.7\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8bbd470f524833532e041b110abe9e3d514d63eb">
+        <dex dex="D:\ANDROID\ASproject\AugmentedReality_Android\app\build\intermediates\pre-dexed\debug\classes-c811199bd8ec8e7e94f8c70f66954b00483c5c11.jar" />
+    </item>
+    <item
+        jar="D:\ANDROID\ASproject\AugmentedReality_Android\app\build\intermediates\exploded-aar\com.koushikdutta.async\androidasync\2.1.7\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="eace26bfd08119044e19e9fc0f9ae1bdffac83ed">
+        <dex dex="D:\ANDROID\ASproject\AugmentedReality_Android\app\build\intermediates\pre-dexed\debug\classes-a57996f3c1e9ec1bd1f4ed1c10147d744798dfe0.jar" />
+    </item>
+    <item
+        jar="C:\Users\huylv\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/hackintosh/Documents/ASprj/AugmentedReality-Android/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-acd4421669f59cadf9d6c9385b571e9d6bf9e8d6.jar" />
+        <dex dex="D:\ANDROID\ASproject\AugmentedReality_Android\app\build\intermediates\pre-dexed\debug\picasso-2.5.2-33314056994b4bf5047cc44df3832424d4b35b78.jar" />
     </item>
 
 </items>

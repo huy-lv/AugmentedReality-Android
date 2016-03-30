@@ -57,9 +57,6 @@ public class MarkerActivity extends AppCompatActivity {
     @Bind(R.id.swipeRefreshLayoutMarkerOnline)
     SwipeRefreshLayout swipeRefreshLayoutMarkerOnline;
 
-    @Bind(R.id.swipeRefreshLayoutMarkerOffline)
-    SwipeRefreshLayout swipeRefreshLayoutMarkerOffline;
-
     @Bind(R.id.marker_list_recycler_view)
     RecyclerView marker_list_recycler_view;
 
@@ -75,6 +72,7 @@ public class MarkerActivity extends AppCompatActivity {
 
     private MarkersAdapter markerAdapterOffline;
     private List<Marker> markerListOffline = new ArrayList<>();
+    boolean FIRST_TAB = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +92,18 @@ public class MarkerActivity extends AppCompatActivity {
         marker_list_recycler_view.setLayoutManager(mLayoutManager);
         marker_list_recycler_view.setItemAnimator(new DefaultItemAnimator());
         marker_list_recycler_view.setAdapter(markerAdapterOnline);
-//        getAllMarker();
+        getAllMarker();
 
         markerAdapterOffline = new MarkersAdapter(this,markerListOffline);
 
         swipeRefreshLayoutMarkerOnline.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getAllMarker();
+                if(FIRST_TAB){
+                    getAllMarker();
+                }else{
+                    checkMarkerOffline();
+                }
             }
         });
 
@@ -113,12 +115,15 @@ public class MarkerActivity extends AppCompatActivity {
                 startActivityForResult(photoPickerIntent, SELECT_PHOTO);
             }
         });
+        checkMarkerOffline();
+    }
 
-
+    private void checkMarkerOffline() {
         //check local marker
         CheckLocalMarker clm = new CheckLocalMarker(this);
         clm.execute();
         try {
+            if(swipeRefreshLayoutMarkerOnline.isRefreshing()) swipeRefreshLayoutMarkerOnline.setRefreshing(false);
             switch (clm.get()) {
                 case 1:
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
@@ -144,6 +149,7 @@ public class MarkerActivity extends AppCompatActivity {
         marker_list_recycler_view.setAdapter(markerAdapterOnline);
         marker_list_switch_online.setBackgroundColor(Color.parseColor("#00C431"));
         marker_list_switch_offline.setBackgroundColor(Color.parseColor("#7BFF00"));
+        FIRST_TAB = true;
     }
 
     @OnClick(R.id.marker_list_switch_offline)
@@ -151,6 +157,7 @@ public class MarkerActivity extends AppCompatActivity {
         marker_list_recycler_view.setAdapter(markerAdapterOffline);
         marker_list_switch_online.setBackgroundColor(Color.parseColor("#7BFF00"));
         marker_list_switch_offline.setBackgroundColor(Color.parseColor("#00C431"));
+        FIRST_TAB = false;
     }
 
     public void getAllMarker() {

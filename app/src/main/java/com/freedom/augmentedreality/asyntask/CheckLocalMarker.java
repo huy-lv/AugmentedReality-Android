@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.freedom.augmentedreality.app.AppConfig;
 import com.freedom.augmentedreality.app.Utils;
+import com.freedom.augmentedreality.helper.CacheHelper;
 import com.freedom.augmentedreality.helper.SQLiteHandler;
 import com.freedom.augmentedreality.model.Marker;
 
@@ -21,7 +22,7 @@ public class CheckLocalMarker extends AsyncTask<Void, Void, Integer> {
 
     Context context;
     ProgressDialog pdLoading;
-    ArrayList<Marker> markerListOffline;
+    ArrayList<String> markerNameList;
 
     public CheckLocalMarker(Context c) {
         context = c;
@@ -57,43 +58,60 @@ public class CheckLocalMarker extends AsyncTask<Void, Void, Integer> {
         String path = rootFolder.getPath();
         Log.e("cxz", "Path: " + path);
         AppConfig.PATH_AR = path;
-        File file[] = new File(path).listFiles();
-        Log.e("cxz", "Size: " + file.length);
+        File files[] = new File(path).listFiles();
+        Log.e("cxz", "Size: " + files.length);
         int i = 0;
-        markerListOffline = new ArrayList<>();
-        while (i < file.length) {
-            if (Utils.getFileExt(file[i].getName()).equals("fset")) {
-                String markerName = Utils.getFileName(file[i].getName());
+        SQLiteHandler db = new SQLiteHandler(context);
+        db.deleteAllMarkersOffline();
+        markerNameList = new ArrayList<>();
+        while (i < files.length) {
 
-                if (Utils.getFileName(file[i + 1].getName()).equals(markerName)) {
-                    if (Utils.getFileName(file[i + 2].getName()).equals(markerName)) {
-                        if (Utils.getFileName(file[i + 3].getName()).equals(markerName)) {
-                            SQLiteHandler db = new SQLiteHandler(context);
-                            Marker m = new Marker((i % 3), markerName, file[i + 3].toString(), file[i].toString(), file[i + 1].toString(), file[i + 2].toString());
-                            db.addMarkerOffline(m);
-                            db.close();
+            if (Utils.getFileExt(files[i].getName()).equals("fset")) {
 
-                            copyToCache();
-                            Log.e("cxz", "marker:" + m);
+                String markerName = Utils.getFileName(files[i].getName());
+                if(!markerNameList.contains(markerName)) {
+                    File isetFile = new File(path + File.separator + markerName + ".iset");
+                    if (checkIfFolderContain(files, isetFile)) {
+                        File fset3File = new File(path + File.separator + markerName + ".fset3");
+                        if (checkIfFolderContain(files, fset3File)) {
+                            File imageFile = new File(path + File.separator + markerName + ".jpg");
+                            if (checkIfFolderContain(files, imageFile)) {
+
+                                Marker m = new Marker((i % 3), markerName, imageFile.toString(), isetFile.toString(),files[i].toString(), fset3File.toString());
+                                db.addMarkerOffline(m);
+
+                                markerNameList.add(markerName);
+                                copyToCache(markerName);
+                                Log.e("cxz", "marker:" + m);
+                            } else {
+                                return -3;
+                            }
                         } else {
-                            return -3;
+                            return -1;
                         }
                     } else {
-                        return -1;
+                        return -2;
                     }
-                } else {
-                    return -2;
                 }
-
             }
             i += 1;
         }
-
+        db.close();
         return 1;
     }
 
-    private void copyToCache() {
+    boolean checkIfFolderContain(File fs[],File f){
+        for(File m:fs){
+            if(m.getName().equals(f.getName())){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private void copyToCache(String markerName) {
+        CacheHelper cacheHelper = CacheHelper.getInstance();
+        cacheHelper.cacheDataNFT(context,markerName);
     }
 
     @Override
